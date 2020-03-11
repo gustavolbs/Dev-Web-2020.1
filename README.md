@@ -1,19 +1,17 @@
-# ZapZapson
+# Money Tracker
 
-> A real-time live chat to talk with your friends where you are
-
+> A real-time currency converter and stock monitor for world stock exchanges and their stocks
 
 ### Specifications
 
-#### First Screen (Login)
+#### First Screen (Home)
 
-- Here, you can login in the live chat to start to chat with your friends
+- Soon
 
+#### Second Screen (Search?)
 
-#### Second Screen (Main)
-
-- Here you can choose with who you want to talk and chat with him.
+- Soon
 
 #### Third Screen (Dashboard?)
 
-- Here you can see all users and some ohter things.
+- Soon
