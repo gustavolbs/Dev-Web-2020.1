@@ -10,7 +10,7 @@
 
 # production
 /build
-.netlifly/state.json
+.netlify/state.json
 
 # misc
 .DS_Store
