@@ -12,6 +12,7 @@ export default {
     textSecondary: "#F6F8FF",
 
     goUp: "#23CE6B",
-    goDown: "#f2462c"
+    goDown: "#f2462c",
+    notInformed: "#e0d42b"
   }
 };

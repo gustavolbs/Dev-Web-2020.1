@@ -14,18 +14,19 @@ export default class Main extends Component {
     this.state = {
       currencies: {},
       stocks: {},
-      isLoading: true
+      isLoading: true,
+      quantity: null
     };
     this.reloadData = this.reloadData.bind(this);
   }
 
   async componentDidMount() {
     this.reloadData();
-    setInterval(this.reloadData, 30000);
+    setInterval(this.reloadData, 1000);
   }
 
   async reloadData() {
-    const response = await api.get("/all");
+    const response = await api.get("/home");
 
     this.setState({
       currencies: response.data.currencies,
@@ -33,6 +34,10 @@ export default class Main extends Component {
       isLoading: false
     });
   }
+
+  handleInputChange = e => {
+    this.setState({ [e.target.name]: e.target.value });
+  };
 
   render() {
     return (
@@ -57,8 +62,13 @@ export default class Main extends Component {
 
         <div>
           <div>
-            <input type="text" />
-            <button>pesquisar ação</button>
+            <input
+              name="quantity"
+              type="number"
+              min="1"
+              placeholder="Insira uma quantia..."
+              onChange={this.handleInputChange}
+            />
           </div>
 
           <br />
@@ -70,7 +80,10 @@ export default class Main extends Component {
               {this.state.currencies
                 ? Object.keys(this.state.currencies).map(currencyKey => {
                     return (
-                      <Card currency={this.state.currencies[currencyKey]} />
+                      <Card
+                        currency={this.state.currencies[currencyKey]}
+                        quantity={this.state.quantity}
+                      />
                     );
                   })
                 : "Ocorreu um erro, tente novamente mais tarde"}

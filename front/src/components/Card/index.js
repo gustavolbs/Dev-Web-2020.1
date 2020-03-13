@@ -32,15 +32,20 @@ export default function SimpleCard(props) {
       fontSize: 14,
       color: `${colors.textPrimary}`
     },
+    subtitle: {
+      fontSize: 12
+    },
     button: {
       fontSize: 12,
       fontWeight: "600",
       color: `${colors.textPrimary}`
     },
     pos: {
-      marginBottom: `${props.stocks ? 10 : 12}` ,
-      color: `${props.stocks ? colors.textPrimary :
-        props.currency && props.currency.pctChange > 0
+      marginBottom: 14,
+      color: `${
+        !props.currency
+          ? colors.notInformed
+          : props.currency.pctChange > 0
           ? colors.goUp
           : colors.goDown
       }`
@@ -59,33 +64,79 @@ export default function SimpleCard(props) {
         <Typography className={classes.title} gutterBottom>
           {props.currency
             ? `${props.currency.code} - ${props.currency.name}`
-            : `${props.stocks.name}`}
+            : props.stocks
+            ? `${props.stocks.name}`
+            : props.highExchange
+            ? `${props.highExchange.symb}`
+            : props.lowExchange
+            ? `${props.lowExchange.symb}`
+            : props.negotiated && `${props.negotiated.scty.symb}`}
         </Typography>
+
         {props.stocks && (
-          <Typography className={classes.title} gutterBottom>
+          <Typography className={classes.subtitle} gutterBottom>
             {props.stocks.location}
           </Typography>
         )}
+
+        {(props.highExchange || props.lowExchange || props.negotiated) && (
+          <Typography className={classes.subtitle} gutterBottom>
+            {props.highExchange
+              ? props.highExchange.desc
+              : props.lowExchange
+              ? props.lowExchange.desc
+              : props.negotiated && props.negotiated.scty.desc}
+          </Typography>
+        )}
+
         <Typography variant="h5" component="h2">
           {props.currency
-            ? `${props.currency.ask}`
-            : props.stocks.points
-            ? props.stocks.points
+            ? `R$ ${(
+                props.currency.ask * (props.quantity ? props.quantity : 1)
+              ).toFixed(2)}`
+            : props.stocks
+            ? `${props.stocks.points}`
+            : props.highExchange
+            ? `R$ ${(
+                props.highExchange.SctyQtn.curPrc *
+                (props.quantity ? props.quantity : 1)
+              ).toFixed(2)}`
+            : props.lowExchange
+            ? `R$${(
+                props.lowExchange.SctyQtn.curPrc *
+                (props.quantity ? props.quantity : 1)
+              ).toFixed(2)}`
+            : props.negotiated
+            ? `R$ ${(
+                props.negotiated.pricVal * (props.quantity ? props.quantity : 1)
+              ).toFixed(2)}`
             : "Valor não informado"}
         </Typography>
+
         <Typography className={classes.pos}>
           {props.currency
-            ? props.currency.pctChange + "%"
-            : props.stocks.variation + "%"}
+            ? `${props.currency.pctChange}%`
+            : props.stocks
+            ? `Variou ${props.stocks.variation.toFixed(2)}%`
+            : props.highExchange
+            ? `Variou ${props.highExchange.SctyQtn.prcFlcn.toFixed(2)}%`
+            : props.lowExchange
+            ? `Variou ${props.lowExchange.SctyQtn.prcFlcn.toFixed(2)}%`
+            : props.negotiated
+            ? "Valor não informado"
+            : "Valor não informado"}
         </Typography>
+
         <br />
         <Typography variant="body2" component="p">
-          {props.currency
+          {props.time
+            ? `Atualizado em: ${props.time}`
+            : props.currency
             ? `Atualizado em: ${props.currency.create_date}`
-            : `Atualizado em: ${props.stocks.create_date}`}
-
-          <br />
+            : props.stocks && `Atualizado em: ${props.stocks.create_date}`}
         </Typography>
+
+        <br />
       </CardContent>
       <CardActions>
         <Button
