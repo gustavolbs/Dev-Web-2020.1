@@ -9,6 +9,9 @@ export default {
     backgroundSecondary: "#141418",
 
     textPrimary: "#F6F8FF",
-    textSecondary: "#F6F8FF"
+    textSecondary: "#F6F8FF",
+
+    goUp: "#23CE6B",
+    goDown: "#f2462c"
   }
 };

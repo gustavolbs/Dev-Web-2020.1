@@ -1,8 +1,8 @@
 import React from "react";
 import Main from "./pages/Main";
-import Second from "./pages/Second";
+import StockExchanges from "./pages/StockExchanges";
 import { ReactComponent as Home } from "./assets/images/svg/home.svg";
-import { ReactComponent as Arrow } from "./assets/images/svg/arrow.svg";
+import { ReactComponent as Papers } from "./assets/images/svg/papers.svg";
 
 const routes = [
   {
@@ -13,11 +13,11 @@ const routes = [
     component: () => <Main />
   },
   {
-    path: "/second",
+    path: "/Ações",
     exact: true,
-    icon: <Arrow />,
-    name: "Second",
-    component: () => <Second />
+    icon: <Papers />,
+    name: "Ações",
+    component: () => <StockExchanges />
   }
 ];
 

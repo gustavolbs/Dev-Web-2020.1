@@ -8,12 +8,10 @@ import Spinner from "../../components/Spinner";
 
 import { Container, CardList } from "./styles";
 
-export default class Main extends Component {
+export default class StockExchanges extends Component {
   constructor() {
     super();
     this.state = {
-      currencies: {},
-      stocks: {},
       isLoading: true
     };
     this.reloadData = this.reloadData.bind(this);
@@ -25,11 +23,11 @@ export default class Main extends Component {
   }
 
   async reloadData() {
-    const response = await api.get("/all");
+    // const response = await api.get("/all");
 
     this.setState({
-      currencies: response.data.currencies,
-      stocks: response.data.stocks,
+      // currencies: response.data.currencies,
+      // stocks: response.data.stocks,
       isLoading: false
     });
   }
@@ -37,12 +35,9 @@ export default class Main extends Component {
   render() {
     return (
       <Container>
-        <Header title={"Home"} />
+        <Header title={"Ações"} />
         <br />
-        <span>
-          Acompanhe os valores das moedas e bolsa de valores ao redor do mundo
-          em tempo real
-        </span>
+        <span>Acompanhe os valores das ações da Bovespa em tempo real</span>
 
         <br />
         <br />
@@ -62,33 +57,18 @@ export default class Main extends Component {
           </div>
 
           <br />
-          <h2>Moedas</h2>
+          <h2>Ações selecionadas</h2>
           {this.state.isLoading ? (
             <Spinner />
           ) : (
             <CardList>
-              {this.state.currencies
-                ? Object.keys(this.state.currencies).map(currencyKey => {
+              {this.state.stockExchanges
+                ? Object.keys(this.state.stockExchanges).map(stockExchange => {
                     return (
-                      <Card currency={this.state.currencies[currencyKey]} />
+                      <Card
+                        currency={this.state.stockExchanges[stockExchange]}
+                      />
                     );
-                  })
-                : "Ocorreu um erro, tente novamente mais tarde"}
-            </CardList>
-          )}
-
-          <br />
-          <br />
-          <br />
-          <br />
-          <h2>Bolsas</h2>
-          {this.state.isLoading ? (
-            <Spinner />
-          ) : (
-            <CardList>
-              {this.state.stocks
-                ? Object.keys(this.state.stocks).map(stocksKey => {
-                    return <Card stocks={this.state.stocks[stocksKey]} />;
                   })
                 : "Ocorreu um erro, tente novamente mais tarde"}
             </CardList>

@@ -6,6 +6,7 @@ export const Container = styled.div`
   position: fixed;
   transition: width 600ms ease;
   overflow: scroll;
+  z-index: 100;
 
   :hover {
     ul {

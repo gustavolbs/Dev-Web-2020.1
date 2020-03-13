@@ -18,7 +18,7 @@ export default function Sidebar({ toggleTheme }) {
         <ul>
           <li>
             <a href="#">
-              <span>App name</span>
+              <span>MTracker</span>
               <Arrow />
             </a>
           </li>
