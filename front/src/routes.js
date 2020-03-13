@@ -13,7 +13,7 @@ const routes = [
     component: () => <Main />
   },
   {
-    path: "/Ações",
+    path: "/acoes",
     exact: true,
     icon: <Papers />,
     name: "Ações",

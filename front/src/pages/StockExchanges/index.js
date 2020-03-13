@@ -12,7 +12,9 @@ export default class StockExchanges extends Component {
   constructor() {
     super();
     this.state = {
-      isLoading: true
+      isLoading: true,
+      most_exchanges: {},
+      most_negotiated: {},
     };
     this.reloadData = this.reloadData.bind(this);
   }
@@ -23,11 +25,11 @@ export default class StockExchanges extends Component {
   }
 
   async reloadData() {
-    // const response = await api.get("/all");
+    const response = await api.get("/all");
 
     this.setState({
-      // currencies: response.data.currencies,
-      // stocks: response.data.stocks,
+      most_exchanges: response.data.most_exchanges,
+      most_negotiated: response.data.most_negotiated,
       isLoading: false
     });
   }
@@ -57,7 +59,7 @@ export default class StockExchanges extends Component {
           </div>
 
           <br />
-          <h2>Ações selecionadas</h2>
+          <h2>Ações mais asdasdasd</h2>
           {this.state.isLoading ? (
             <Spinner />
           ) : (

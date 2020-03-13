@@ -1,4 +1,4 @@
-# Money Tracker
+# Money Track
 
 > A real-time currency converter and stock monitor for world stock exchanges and their stocks
 

@@ -38,8 +38,8 @@ export default function SimpleCard(props) {
       color: `${colors.textPrimary}`
     },
     pos: {
-      marginBottom: 12,
-      color: `${
+      marginBottom: `${props.stocks ? 10 : 12}` ,
+      color: `${props.stocks ? colors.textPrimary :
         props.currency && props.currency.pctChange > 0
           ? colors.goUp
           : colors.goDown
@@ -78,6 +78,7 @@ export default function SimpleCard(props) {
             ? props.currency.pctChange + "%"
             : props.stocks.variation + "%"}
         </Typography>
+        <br />
         <Typography variant="body2" component="p">
           {props.currency
             ? `Atualizado em: ${props.currency.create_date}`

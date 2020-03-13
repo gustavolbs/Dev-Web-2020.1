@@ -4,7 +4,7 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const api = axios.create({
-  baseURL: process.env.BASE_URL || "https://api-money-tracker.herokuapp.com/"
+  baseURL: "http://localhost:3000" || "https://api-money-tracker.herokuapp.com/"
 });
 
 export default api;
