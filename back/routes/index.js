@@ -1,8 +1,7 @@
 var express = require("express");
 var axios = require("axios").default;
 var router = express.Router();
-var getPercentageChange = require("../utils/getPercentageChange");
-
+const { curly } = require('node-libcurl');
 // Get Everything
 router.get("/", async function(req, res, next) {
   var response = {};
@@ -19,43 +18,49 @@ router.get("/", async function(req, res, next) {
     console.log(error);
   }
 
-  // Get Stocks
+  console.log("Done 1")
+  // Get Most Stocks Exchanges
   try {
-    let stocks = ["^BVSP", "NSE", "BOVV11.SAO"];
-    let stock = await axios.get(
-      "https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=^BVSP&apikey=QUDEF4MP6X9LP713"
+    let most_exchanges = await axios.get(
+      `http://cotacao.b3.com.br/mds/api/v1/InstrumentPriceFluctuation/ibov`
+    );
+    
+    response["most_exchanges"] = most_exchanges.data;
+  } catch (error) {
+    response["most_exchangesError"] = error;
+    console.log(error);
+  }
+  console.log("Done 2")
+  
+  try {
+    let most_negotiated = await axios.get(
+      `http://cotacao.b3.com.br/mds/api/v1/InstrumentTradeVolume/vista`
+    );
+    
+    response["most_negotiated"] = most_negotiated.data;
+  } catch (error) {
+    response["most_negotiatedError"] = error;
+    console.log(error);
+  }
+  console.log("Done 3")
+  
+
+  
+  try {
+    const bovespa = await axios.get(
+      "https://api.cotacoes.uol.com/asset/intraday/list/?format=JSON&fields=price,pctChange,date&item=1"
     );
 
-    response["stocks"] = {
-      // "name": stock.data["Global Quote"]["01. symbol"],
-      // "location": stock.data["Global Quote"]["01. symbol"],
-      symbol: stock.data["Global Quote"]["01. symbol"],
-      points: stock.data["Global Quote"]["05. price"],
-      variation: stock.data["Global Quote"]["10. change percent"]
-    };
+    response["bovespa"] = bovespa.data;
   } catch (error) {
-    response["stockError"] = error;
+    response["bovespaError"] = error;
+    console.log(error);
   }
-
-  // try {
-  //   const stocks = await axios.get("https://api.hgbrasil.com/finance");
-  //   var date = new Date();
-
-  //   response["stocks"] = stocks.data.results.stocks;
-  //   console.log(response["stocks"]);
-
-  //   Object.keys(response["stocks"]).map(stock => {
-  //     response["stocks"][stock]["create_date"] = `${date
-  //       .toTimeString()
-  //       .split(" ")[0]
-  //       .trim()} ${date.toLocaleDateString()}`;
-  //   });
-  // } catch (error) {
-  //   response["stockError"] = error;
-  //   console.log(error);
-  // }
-
+  console.log("Done 4")
+        
+        
+        
   res.send(response);
 });
-
+      
 module.exports = router;
