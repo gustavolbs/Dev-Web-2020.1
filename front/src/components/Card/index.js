@@ -43,11 +43,33 @@ export default function SimpleCard(props) {
     pos: {
       marginBottom: 14,
       color: `${
-        !props.currency
+        props.currency
+          ? props.currency.pctChange > 0
+            ? colors.goUp
+            : props.currency.pctChange < 0
+            ? colors.goDown
+            : colors.notInformed
+          : props.stocks
+          ? props.stocks.variation > 0
+            ? colors.goUp
+            : props.stocks.variation < 0
+            ? colors.goDown
+            : colors.notInformed
+          : props.highExchange
+          ? props.highExchange.SctyQtn.prcFlcn > 0
+            ? colors.goUp
+            : props.highExchange.SctyQtn.prcFlcn < 0
+            ? colors.goDown
+            : colors.notInformed
+          : props.lowExchange
+          ? props.lowExchange.SctyQtn.prcFlcn > 0
+            ? colors.goUp
+            : props.lowExchange.SctyQtn.prcFlcn < 0
+            ? colors.goDown
+            : colors.notInformed
+          : props.negotiated
           ? colors.notInformed
-          : props.currency.pctChange > 0
-          ? colors.goUp
-          : colors.goDown
+          : colors.notInformed
       }`
     }
   });
@@ -89,43 +111,46 @@ export default function SimpleCard(props) {
           </Typography>
         )}
 
-        <Typography variant="h5" component="h2">
-          {props.currency
-            ? `R$ ${(
-                props.currency.ask * (props.quantity ? props.quantity : 1)
-              ).toFixed(2)}`
-            : props.stocks
-            ? `${props.stocks.points}`
-            : props.highExchange
-            ? `R$ ${(
-                props.highExchange.SctyQtn.curPrc *
-                (props.quantity ? props.quantity : 1)
-              ).toFixed(2)}`
-            : props.lowExchange
-            ? `R$${(
-                props.lowExchange.SctyQtn.curPrc *
-                (props.quantity ? props.quantity : 1)
-              ).toFixed(2)}`
-            : props.negotiated
-            ? `R$ ${(
-                props.negotiated.pricVal * (props.quantity ? props.quantity : 1)
-              ).toFixed(2)}`
-            : "Valor não informado"}
-        </Typography>
+        <div>
+          <Typography variant="h5" component="h2">
+            {props.currency
+              ? `R$ ${(
+                  props.currency.ask * (props.quantity ? props.quantity : 1)
+                ).toFixed(2)}`
+              : props.stocks
+              ? `${props.stocks.points}`
+              : props.highExchange
+              ? `R$ ${(
+                  props.highExchange.SctyQtn.curPrc *
+                  (props.quantity ? props.quantity : 1)
+                ).toFixed(2)}`
+              : props.lowExchange
+              ? `R$${(
+                  props.lowExchange.SctyQtn.curPrc *
+                  (props.quantity ? props.quantity : 1)
+                ).toFixed(2)}`
+              : props.negotiated
+              ? `R$ ${(
+                  props.negotiated.pricVal *
+                  (props.quantity ? props.quantity : 1)
+                ).toFixed(2)}`
+              : "Valor não informado"}
+          </Typography>
 
-        <Typography className={classes.pos}>
-          {props.currency
-            ? `${props.currency.pctChange}%`
-            : props.stocks
-            ? `Variou ${props.stocks.variation.toFixed(2)}%`
-            : props.highExchange
-            ? `Variou ${props.highExchange.SctyQtn.prcFlcn.toFixed(2)}%`
-            : props.lowExchange
-            ? `Variou ${props.lowExchange.SctyQtn.prcFlcn.toFixed(2)}%`
-            : props.negotiated
-            ? "Valor não informado"
-            : "Valor não informado"}
-        </Typography>
+          <Typography className={classes.pos}>
+            {props.currency
+              ? `${props.currency.pctChange}%`
+              : props.stocks
+              ? `Variou ${props.stocks.variation.toFixed(2)}%`
+              : props.highExchange
+              ? `Variou ${props.highExchange.SctyQtn.prcFlcn.toFixed(2)}%`
+              : props.lowExchange
+              ? `Variou ${props.lowExchange.SctyQtn.prcFlcn.toFixed(2)}%`
+              : props.negotiated
+              ? "Valor não informado"
+              : "Valor não informado"}
+          </Typography>
+        </div>
 
         <br />
         <Typography variant="body2" component="p">
