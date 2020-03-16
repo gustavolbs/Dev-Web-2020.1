@@ -50,21 +50,21 @@ export default function SimpleCard(props) {
             ? colors.goDown
             : colors.notInformed
           : props.stocks
-          ? props.stocks.variation > 0
+          ? parseInt(props.stocks.variation) > 0
             ? colors.goUp
-            : props.stocks.variation < 0
+            : parseInt(props.stocks.variation) < 0
             ? colors.goDown
             : colors.notInformed
           : props.highExchange
-          ? props.highExchange.SctyQtn.prcFlcn > 0
+          ? parseInt(props.highExchange.SctyQtn.prcFlcn) > 0
             ? colors.goUp
-            : props.highExchange.SctyQtn.prcFlcn < 0
+            : parseInt(props.highExchange.SctyQtn.prcFlcn) < 0
             ? colors.goDown
             : colors.notInformed
           : props.lowExchange
-          ? props.lowExchange.SctyQtn.prcFlcn > 0
+          ? parseInt(props.lowExchange.SctyQtn.prcFlcn) > 0
             ? colors.goUp
-            : props.lowExchange.SctyQtn.prcFlcn < 0
+            : parseInt(props.lowExchange.SctyQtn.prcFlcn) < 0
             ? colors.goDown
             : colors.notInformed
           : props.negotiated
@@ -141,11 +141,11 @@ export default function SimpleCard(props) {
             {props.currency
               ? `${props.currency.pctChange}%`
               : props.stocks
-              ? `Variou ${props.stocks.variation.toFixed(2)}%`
+              ? `${props.stocks.variation.toFixed(2)}%`
               : props.highExchange
-              ? `Variou ${props.highExchange.SctyQtn.prcFlcn.toFixed(2)}%`
+              ? `${props.highExchange.SctyQtn.prcFlcn.toFixed(2)}%`
               : props.lowExchange
-              ? `Variou ${props.lowExchange.SctyQtn.prcFlcn.toFixed(2)}%`
+              ? `${props.lowExchange.SctyQtn.prcFlcn.toFixed(2)}%`
               : props.negotiated
               ? "Valor não informado"
               : "Valor não informado"}
