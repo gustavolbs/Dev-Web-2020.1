@@ -22,10 +22,8 @@ export const CardList = styled.div`
 
   @media only screen and (max-width: 600px) {
     div {
-      width: 100% !important;
-      height: auto;
-      max-width: 100%;
-      max-height: auto;
+      min-width: 180px;
+      max-width: 180px;
     }
   }
 `;

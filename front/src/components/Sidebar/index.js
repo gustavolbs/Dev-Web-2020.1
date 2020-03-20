@@ -18,7 +18,11 @@ export default function Sidebar({ toggleTheme }) {
         <ul>
           <li>
             <a href="#">
-              <span>MTracker</span>
+              <span>
+                Money
+                <br />
+                Track
+              </span>
               <Arrow />
             </a>
           </li>

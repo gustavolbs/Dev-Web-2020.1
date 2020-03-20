@@ -152,7 +152,6 @@ export default function SimpleCard(props) {
           </Typography>
         </div>
 
-        <br />
         <Typography variant="body2" component="p">
           {props.time
             ? `Atualizado em: ${props.time}`
@@ -160,20 +159,18 @@ export default function SimpleCard(props) {
             ? `Atualizado em: ${props.currency.create_date}`
             : props.stocks && `Atualizado em: ${props.stocks.create_date}`}
         </Typography>
-
-        <br />
+        <CardActions>
+          <Button
+            onClick={() => {
+              setDisplay(false);
+            }}
+            className={classes.button}
+            size="small"
+          >
+            Não exibir
+          </Button>
+        </CardActions>
       </CardContent>
-      <CardActions>
-        <Button
-          onClick={() => {
-            setDisplay(false);
-          }}
-          className={classes.button}
-          size="small"
-        >
-          Não exibir
-        </Button>
-      </CardActions>
     </Card>
   );
 }

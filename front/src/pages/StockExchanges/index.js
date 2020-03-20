@@ -15,14 +15,21 @@ export default class StockExchanges extends Component {
       isLoading: true,
       most_exchanges: {},
       most_negotiated: {},
-      quantity: null
+      quantity: null,
+      handleInterval: null
     };
     this.reloadData = this.reloadData.bind(this);
   }
 
+  async componentWillUnmount() {
+    clearInterval(this.state.handleInterval);
+  }
+
   async componentDidMount() {
     this.reloadData();
-    setInterval(this.reloadData, 1000);
+    var handleInterval = setInterval(this.reloadData, 1000);
+
+    this.setState({ handleInterval });
   }
 
   async reloadData() {
@@ -42,32 +49,15 @@ export default class StockExchanges extends Component {
   render() {
     return (
       <Container>
-        <Header title={"Ações"} />
-        <br />
-        <span>Acompanhe os valores das ações da Bovespa em tempo real</span>
-
-        <br />
-        <br />
-        <span style={{ color: "red", fontWeight: "bold" }}>
-          Exoneração de responsabilidade: Os dados apresentados aqui são
-          aproximações dos valores reais. Nenhum dado apresentado aqui deve ser
-          tomado como valor 100% correto. Podem haver leves variações. Todos os
-          valores apresentados aqui consideram as conversões em BRL.
-        </span>
-        <br />
-        <br />
+        <Header
+          title={"Ações"}
+          description={
+            "Acompanhe os valores das ações da Bovespa em tempo real"
+          }
+          handleInputChange={this.handleInputChange}
+        />
 
         <div>
-          <div>
-            <input
-              name="quantity"
-              type="number"
-              min="1"
-              placeholder="Insira uma quantia..."
-              onChange={this.handleInputChange}
-            />
-          </div>
-
           <br />
           <h2>Maiores Altas</h2>
           {this.state.isLoading ? (

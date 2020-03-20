@@ -9,20 +9,28 @@ import Spinner from "../../components/Spinner";
 import { Container, CardList } from "./styles";
 
 export default class Main extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       currencies: {},
       stocks: {},
       isLoading: true,
-      quantity: null
+      quantity: null,
+      handleInterval: null
     };
     this.reloadData = this.reloadData.bind(this);
+    this.handleInputChange = this.handleInputChange.bind(this);
+  }
+
+  async componentWillUnmount() {
+    clearInterval(this.state.handleInterval);
   }
 
   async componentDidMount() {
     this.reloadData();
-    setInterval(this.reloadData, 1000);
+    var handleInterval = setInterval(this.reloadData, 1000);
+
+    this.setState({ handleInterval });
   }
 
   async reloadData() {
@@ -42,35 +50,15 @@ export default class Main extends Component {
   render() {
     return (
       <Container>
-        <Header title={"Home"} />
-        <br />
-        <span>
-          Acompanhe os valores das moedas e bolsa de valores ao redor do mundo
-          em tempo real
-        </span>
-
-        <br />
-        <br />
-        <span style={{ color: "red", fontWeight: "bold" }}>
-          Exoneração de responsabilidade: Os dados apresentados aqui são
-          aproximações dos valores reais. Nenhum dado apresentado aqui deve ser
-          tomado como valor 100% correto. Podem haver leves variações. Todos os
-          valores apresentados aqui consideram as conversões em BRL.
-        </span>
-        <br />
-        <br />
+        <Header
+          title={"Home"}
+          description={
+            "Acompanhe os valores das moedas e bolsa de valores ao redor do mundo em tempo real"
+          }
+          handleInputChange={this.handleInputChange}
+        />
 
         <div>
-          <div>
-            <input
-              name="quantity"
-              type="number"
-              min="1"
-              placeholder="Insira uma quantia..."
-              onChange={this.handleInputChange}
-            />
-          </div>
-
           <br />
           <h2>Moedas</h2>
           {this.state.isLoading ? (

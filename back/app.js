@@ -1,11 +1,14 @@
 var express = require("express");
+require = require("esm")(module /*, options*/);
 const cors = require("cors");
 var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
+var sendEmails = require("./utils/sendEmail");
 
 var homeRouter = require("./routes/home");
 var exchangesRouter = require("./routes/exchanges");
+var notificationsRouter = require("./routes/notifications");
 
 var app = express();
 
@@ -18,5 +21,6 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/home", homeRouter);
 app.use("/exchanges", exchangesRouter);
+app.use("/notifications", notificationsRouter);
 
 module.exports = app;
