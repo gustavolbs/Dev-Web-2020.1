@@ -35,8 +35,7 @@ export default function TransitionsModal() {
       padding: "16px 26px 16px 12px",
       marginRight: "40px",
       "&:hover": {
-        boxShadow:
-          "rgba(0, 0, 0, 0.2) 0px 3px 3px -2px, rgba(0, 0, 0, 0.14) 0px 3px 4px 5px, rgba(0, 0, 0, 0.12) 0px 1px 8px 0px;"
+        background: `${shade(0.4, colors.backgroundPrimary)}`
       }
     }
   }));

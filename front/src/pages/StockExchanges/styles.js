@@ -16,14 +16,12 @@ export const CardList = styled.div`
   flex-wrap: wrap;
 
   div {
-    min-width: 250px;
     max-width: 250px;
   }
 
   @media only screen and (max-width: 600px) {
     div {
-      min-width: 180px;
-      max-width: 180px;
+      max-width: 150px;
     }
   }
 `;

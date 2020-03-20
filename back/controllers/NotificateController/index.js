@@ -1,8 +1,5 @@
 import * as Yup from "yup";
-var axios = require("axios").default;
-
 const models = require("../../database/models/index");
-var sender = require("../../utils/sendEmail");
 
 class NotificateController {
   async index(req, res) {
@@ -36,14 +33,17 @@ class NotificateController {
 
     const { email, currency, value } = req.body;
 
-    const notificateExists = await models.Notificate.findAll({
-      where: { email, currency, value }
+    const notificateExists = await models.Notificate.findOne({
+      where: {
+        email,
+        currency,
+        value
+      }
     });
 
-    // if (notificateExists) {
-    //   return res.json(notificateExists);
-    //   // return res.status(400).json({ error: "Notificação já registrada!" });
-    // }
+    if (notificateExists) {
+      return res.status(400).json({ error: "Notificação já registrada!" });
+    }
 
     const response = await models.Notificate.create({
       email,

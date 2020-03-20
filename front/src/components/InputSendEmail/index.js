@@ -9,6 +9,7 @@ import Input from "@material-ui/core/Input";
 import { ThemeContext } from "styled-components";
 import { shade } from "polished";
 import api from "../../services/Api";
+import Notification from "../Notification";
 
 export default function CustomizedSelects() {
   const { colors, title } = useContext(ThemeContext);
@@ -58,6 +59,11 @@ export default function CustomizedSelects() {
   const [email, setEmail] = React.useState("");
   const [value, setValue] = React.useState("");
   const [currency, setCurrency] = React.useState("");
+  const [notificationOptions, setNotificationOptions] = React.useState({
+    opened: false,
+    severity: null,
+    message: null
+  });
 
   const handleSubmit = async e => {
     e.preventDefault();
@@ -68,78 +74,109 @@ export default function CustomizedSelects() {
         value,
         currency
       });
-      // window.location.reload();
+
+      setNotificationOptions({
+        opened: true,
+        severity: "success",
+        message: "Notificação registrada com sucesso!"
+      });
+      setEmail("");
+      setValue("");
+      setCurrency("");
     } catch (err) {
-      console.log("Something went Wrong");
+      setNotificationOptions({
+        opened: true,
+        severity: "error",
+        message: err.response.data.error
+      });
     } finally {
-      console.log("OK");
+      setTimeout(function() {
+        setNotificationOptions({
+          opened: false,
+          severity: "",
+          message: ""
+        });
+      }, 5000);
     }
   };
 
   return (
-    <div>
-      <FormControl className={classes.margin}>
-        <InputLabel htmlFor="demo-customized-textbox">Email</InputLabel>
-        <Input
-          className={classes.input}
-          value={email}
-          name="email"
-          placeholder="Digite seu email..."
-          type="email"
-          onChange={e => setEmail(`${e.target.value}`)}
-          id="demo-customized-textbox"
+    <>
+      <div>
+        <Notification
+          opened={notificationOptions.opened}
+          severity={notificationOptions.severity}
+          message={notificationOptions.message}
         />
-      </FormControl>
-      <FormControl className={classes.margin}>
-        <InputLabel htmlFor="demo-customized-textbox">Valor</InputLabel>
-        <Input
-          className={classes.input}
-          value={value}
-          name="value"
-          type="number"
-          onChange={e => setValue(`${e.target.value}`)}
-          min="0"
-          step="0.01"
-          placeholder="R$ 1.80 (não digite o símbolo da moeda)"
-          id="demo-customized-textbox"
-        />
-      </FormControl>
-      <FormControl className={classes.margin}>
-        <InputLabel>Moeda</InputLabel>
-        <Select
-          id="demo-customized-select"
-          value={currency}
-          name="currency"
-          onChange={e => setCurrency(`${e.target.value}`)}
-          input={<Input />}
-          className={classes.input}
-        >
-          <MenuItem value="">
-            <em>None</em>
-          </MenuItem>
-          <MenuItem value={"AUD"}>Dólar Australiano</MenuItem>
-          <MenuItem value={"CAD"}>Dólar Canadense</MenuItem>
-          <MenuItem value={"USD"}>Dólar Comercial</MenuItem>
-          <MenuItem value={"USDT"}>Dólar Turismo</MenuItem>
-          <MenuItem value={"EUR"}>Euro</MenuItem>
-          <MenuItem value={"CHF"}>Franco Suíço</MenuItem>
-          <MenuItem value={"JPY"}>Iene Japonês</MenuItem>
-          <MenuItem value={"GBP"}>Libra Esterlina</MenuItem>
-          <MenuItem value={"ILS"}>Novo Shekel Israelense</MenuItem>
-          <MenuItem value={"ARS"}>Peso Argentino</MenuItem>
-          <MenuItem value={"CNY"}>Yuan Chinês</MenuItem>
+      </div>
+      <div>
+        <FormControl className={classes.margin}>
+          <InputLabel htmlFor="demo-customized-textbox">Email</InputLabel>
+          <Input
+            className={classes.input}
+            value={email}
+            name="email"
+            placeholder="Digite seu email..."
+            type="email"
+            onChange={e => setEmail(`${e.target.value}`)}
+            id="demo-customized-textbox"
+          />
+        </FormControl>
+        <FormControl className={classes.margin}>
+          <InputLabel htmlFor="demo-customized-textbox">Valor</InputLabel>
+          <Input
+            className={classes.input}
+            value={value}
+            name="value"
+            type="number"
+            onChange={e => setValue(`${e.target.value}`)}
+            min="0"
+            step="0.01"
+            placeholder="R$ 1.80 (não digite o símbolo da moeda)"
+            id="demo-customized-textbox"
+          />
+        </FormControl>
+        <FormControl className={classes.margin}>
+          <InputLabel>Moeda</InputLabel>
+          <Select
+            id="demo-customized-select"
+            value={currency}
+            name="currency"
+            onChange={e => setCurrency(`${e.target.value}`)}
+            input={<Input />}
+            className={classes.input}
+          >
+            <MenuItem value="">
+              <em>None</em>
+            </MenuItem>
+            <MenuItem value={"AUD"}>Dólar Australiano</MenuItem>
+            <MenuItem value={"CAD"}>Dólar Canadense</MenuItem>
+            <MenuItem value={"USD"}>Dólar Comercial</MenuItem>
+            <MenuItem value={"USDT"}>Dólar Turismo</MenuItem>
+            <MenuItem value={"EUR"}>Euro</MenuItem>
+            <MenuItem value={"CHF"}>Franco Suíço</MenuItem>
+            <MenuItem value={"JPY"}>Iene Japonês</MenuItem>
+            <MenuItem value={"GBP"}>Libra Esterlina</MenuItem>
+            <MenuItem value={"ILS"}>Novo Shekel Israelense</MenuItem>
+            <MenuItem value={"ARS"}>Peso Argentino</MenuItem>
+            <MenuItem value={"CNY"}>Yuan Chinês</MenuItem>
 
-          <MenuItem value={"BTC"}>Bitcoin</MenuItem>
-          <MenuItem value={"LTC"}>Litecoin</MenuItem>
-          <MenuItem value={"ETH"}>Ethereum</MenuItem>
-          <MenuItem value={"XRP"}>Ripple</MenuItem>
-        </Select>
-      </FormControl>
-      <FormControl className={classes.margin}>
-        <Button onClick={handleSubmit} className={classes.button} size="small">
-          ENVIAR!
-        </Button>
-      </FormControl>
-    </div>
+            <MenuItem value={"BTC"}>Bitcoin</MenuItem>
+            <MenuItem value={"LTC"}>Litecoin</MenuItem>
+            <MenuItem value={"ETH"}>Ethereum</MenuItem>
+            <MenuItem value={"XRP"}>Ripple</MenuItem>
+          </Select>
+        </FormControl>
+        <FormControl className={classes.margin}>
+          <Button
+            onClick={handleSubmit}
+            className={classes.button}
+            size="small"
+          >
+            ENVIAR!
+          </Button>
+        </FormControl>
+      </div>
+    </>
   );
 }

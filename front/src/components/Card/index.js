@@ -35,10 +35,19 @@ export default function SimpleCard(props) {
     subtitle: {
       fontSize: 12
     },
+    buttonDiv: {
+      width: "100% !important"
+    },
     button: {
       fontSize: 12,
       fontWeight: "600",
-      color: `${colors.textPrimary}`
+      color: `${colors.textPrimary}`,
+      width: "100%",
+      padding: "10px 0",
+      background: `${shade(0.2, colors.backgroundPrimary)}`,
+      "&:hover": {
+        background: `${shade(0.4, colors.backgroundPrimary)}`
+      }
     },
     pos: {
       marginBottom: 14,
@@ -159,7 +168,7 @@ export default function SimpleCard(props) {
             ? `Atualizado em: ${props.currency.create_date}`
             : props.stocks && `Atualizado em: ${props.stocks.create_date}`}
         </Typography>
-        <CardActions>
+        <CardActions className={classes.buttonDiv}>
           <Button
             onClick={() => {
               setDisplay(false);
