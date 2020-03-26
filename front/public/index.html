@@ -102,31 +102,5 @@
         });
       });
     </script>
-
-    <script>
-      window.addEventListener("beforeunload", () => {
-        // Production code would also be considerate of localStorage size limitations
-        // and would do a LRU cache eviction to maintain sanity on storage.
-        // There should also be a way to clear this data when the user signs out
-        window.localStorage.setItem(
-          `lastKnown_${window.location.href}`,
-          JSON.stringify({
-            data: document.getElementById("root").innerHTML
-          })
-        );
-      });
-    </script>
-    <script>
-      let lastKnownState = window.localStorage.getItem(
-        `lastKnown_${window.location.href}`
-      );
-
-      lastKnownState = lastKnownState && JSON.parse(lastKnownState);
-
-      if (lastKnownState) {
-        document.getElementById("root").innerHTML = lastKnownState.data;
-        window.hasRestoredState = true;
-      }
-    </script>
   </body>
 </html>

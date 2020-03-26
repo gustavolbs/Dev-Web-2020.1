@@ -1,6 +1,5 @@
 var express = require("express");
 
-var axios = require("axios").default;
 var router = express.Router();
 
 var NotificateController = require("../controllers/NotificateController")

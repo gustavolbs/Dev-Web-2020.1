@@ -34,11 +34,16 @@ export default class Main extends Component {
   }
 
   async reloadData() {
-    const response = await api.get("/home");
-
+    const currencies = await api.get("/home");
     this.setState({
-      currencies: response.data.currencies,
-      stocks: response.data.stocks,
+      currencies: currencies.data.currencies,
+      isLoading: false
+    });
+
+    const stocks = await api.get("/home/stocks");
+    console.log(stocks.data.stocks);
+    this.setState({
+      stocks: stocks.data.stocks,
       isLoading: false
     });
   }

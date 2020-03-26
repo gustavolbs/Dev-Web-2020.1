@@ -5,6 +5,7 @@ import routes from "../../routes";
 import { ThemeContext } from "styled-components";
 import { Container } from "./styles";
 
+import Logo from "../../assets/images/gif/MoneyTrackWhite.gif";
 import { ReactComponent as Arrow } from "../../assets/images/svg/arrow.svg";
 import { ReactComponent as Solar } from "../../assets/images/svg/solar.svg";
 import { ReactComponent as Light } from "../../assets/images/svg/light.svg";
@@ -19,9 +20,7 @@ export default function Sidebar({ toggleTheme }) {
           <li>
             <a href="#">
               <span>
-                Money
-                <br />
-                Track
+                <img src={Logo} style={{ width: "auto", height: "68px" }} />
               </span>
               <Arrow />
             </a>

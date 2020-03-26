@@ -8,6 +8,7 @@ var sendEmails = require("./utils/sendEmail");
 
 var homeRouter = require("./routes/home");
 var exchangesRouter = require("./routes/exchanges");
+var bovespaExchangesRouter = require("./routes/bovespaExchanges");
 var notificationsRouter = require("./routes/notifications");
 
 var app = express();
@@ -21,6 +22,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/home", homeRouter);
 app.use("/exchanges", exchangesRouter);
+app.use("/bovespa", bovespaExchangesRouter);
 app.use("/notifications", notificationsRouter);
 
 module.exports = app;
