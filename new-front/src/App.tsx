@@ -1,7 +1,5 @@
 import { ThemeProvider } from "styled-components";
 
-import Sidebar from "./components/Sidebar";
-
 import usePersistedState from "./utils/usePersistedState";
 import { QuantityContextProvider } from "./contexts/quantity";
 
@@ -9,20 +7,24 @@ import "react-loading-skeleton/dist/skeleton.css";
 import light from "./styles/themes/light";
 import dark from "./styles/themes/dark";
 import GlobalStyles from "./styles/global";
+import Router from "./router";
+import { ThemeContextProvider } from "./contexts/theme";
 
 function App() {
-  const [theme, setTheme] = usePersistedState("theme", light);
+  const [persistedTheme, setPersistedTheme] = usePersistedState("theme", light);
 
   const toggleTheme = () => {
-    setTheme(theme.title === "light" ? dark : light);
+    setPersistedTheme(persistedTheme.title === "light" ? dark : light);
   };
 
   return (
     <QuantityContextProvider>
-      <ThemeProvider theme={theme}>
-        <GlobalStyles />
-        <Sidebar toggleTheme={toggleTheme} />
-      </ThemeProvider>
+      <ThemeContextProvider theme={persistedTheme} toggleTheme={toggleTheme}>
+        <ThemeProvider theme={persistedTheme}>
+          <GlobalStyles />
+          <Router />
+        </ThemeProvider>
+      </ThemeContextProvider>
     </QuantityContextProvider>
   );
 }

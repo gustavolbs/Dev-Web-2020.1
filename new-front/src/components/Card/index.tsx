@@ -156,7 +156,9 @@ const CurrencyCard = ({
 
   const label = `${currency.code} - ${currency.name}`;
   const value = new Intl.NumberFormat("pt-BR", currencyOptions).format(
-    Number(quantity) * Number(currency.ask)
+    Number(quantity) *
+      Number(currency.ask) *
+      (currency.code === "BTC" ? 1000 : 1)
   );
 
   const time = new Intl.DateTimeFormat("pt-BR", {

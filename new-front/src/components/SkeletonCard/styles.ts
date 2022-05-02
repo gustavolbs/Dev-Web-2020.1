@@ -32,4 +32,12 @@ export const Container = styled.div`
     align-items: center;
     margin-top: auto;
   }
+
+  @media screen and (max-width: 900px) {
+    max-width: calc(50% - 6px);
+  }
+
+  @media screen and (max-width: 800px) {
+    max-width: 100%;
+  }
 `;

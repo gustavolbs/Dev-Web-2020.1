@@ -1,6 +1,6 @@
-import BovespaExchanges from "./pages/BovespaExchanges";
-import Main from "./pages/Main";
-import StockExchanges from "./pages/StockExchanges";
+import BovespaExchanges from "../pages/BovespaExchanges";
+import Main from "../pages/Main";
+import StockExchanges from "../pages/StockExchanges";
 // import { ReactComponent as Home } from "./assets/images/svg/home.svg";
 // import { ReactComponent as Trending } from "./assets/images/svg/trending.svg";
 // import { ReactComponent as Papers } from "./assets/images/svg/papers.svg";

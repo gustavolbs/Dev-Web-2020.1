@@ -6,8 +6,8 @@ const SkeletonCard: React.FC = () => {
     <>
       {Array(10)
         .fill(1)
-        .map(() => (
-          <Container>
+        .map((_, key) => (
+          <Container key={key}>
             <Skeleton width={"40%"} height={28} enableAnimation />
             <Skeleton count={2} height={12} enableAnimation />
             <Skeleton width={"80%"} height={8} enableAnimation />
