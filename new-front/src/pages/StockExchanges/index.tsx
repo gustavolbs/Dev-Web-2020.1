@@ -2,7 +2,7 @@ import Card from "../../components/Card";
 import Header from "../../components/Header";
 import SkeletonCard from "../../components/SkeletonCard";
 import { useExchanges } from "../../hooks/useExchanges";
-import { CardList, Container } from "./styles";
+import { CardList, Container } from "../../styles/pages";
 
 const StockExchanges: React.FC = () => {
   const {

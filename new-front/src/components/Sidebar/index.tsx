@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import {
   BrowserRouter,
   Routes,
@@ -20,15 +20,23 @@ const Sidebar = ({ toggleTheme }: ISidebarProps) => {
   const { colors, title } = useContext(ThemeContext);
   const { handleChangeQuantity, quantity } = useQuantity();
   const { pathname } = window.location;
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setIsOpen(!isOpen);
+  };
 
   return (
     <BrowserRouter>
-      <Container>
+      <Container className={isOpen ? "menuOpen" : ""}>
         <div>
           <a href="#" className="logo">
             Money Track
           </a>
         </div>
+        <button onClick={toggleMenu}>
+          {isOpen ? <>&#x2715;</> : <>&#9776;</>}
+        </button>
 
         <Input htmlFor="quantity">
           Quantidade
@@ -44,8 +52,8 @@ const Sidebar = ({ toggleTheme }: ISidebarProps) => {
         {routes.map((route) => {
           return (
             <div className={pathname === route.path ? "active" : ""}>
-              <Link to={route.path}>
-                {/* {route.icon} */}
+              <Link to={route.path} onClick={toggleMenu}>
+                {route.icon}
                 {route.name}
               </Link>
             </div>

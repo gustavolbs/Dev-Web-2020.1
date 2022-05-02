@@ -2,7 +2,7 @@ import Card from "../../components/Card";
 import Header from "../../components/Header";
 import SkeletonCard from "../../components/SkeletonCard";
 import { useBovespa } from "../../hooks/useBovespa";
-import { CardList, Container } from "./styles";
+import { CardList, Container } from "../../styles/pages";
 
 const BovespaExchanges: React.FC = () => {
   const { exchanges, isLoading } = useBovespa();

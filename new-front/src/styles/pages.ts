@@ -16,8 +16,7 @@ export const Container = styled.div`
   }
 
   @media only screen and (max-width: 600px) {
-    margin: 0;
-    margin-bottom: 5rem;
+    margin: 5rem 0 0 0;
   }
 `;
 
@@ -27,13 +26,7 @@ export const CardList = styled.div`
   flex-wrap: wrap;
   gap: 24px;
 
-  /* div {
-    max-width: 250px;
+  @media only screen and (max-width: 900px) {
+    gap: 12px;
   }
-
-  @media only screen and (max-width: 600px) {
-    div {
-      max-width: 150px;
-    }
-  } */
 `;

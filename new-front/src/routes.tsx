@@ -15,19 +15,19 @@ interface Route {
 const routes: Route[] = [
   {
     path: "/",
-    // icon: <Home />,
+    // icon: <>&#8962;</>,
     name: "Home",
     component: Main,
   },
   {
     path: "/acoes",
-    // icon: <Trending />,
+    // icon: <>&#8599;</>,
     name: "Ações",
     component: StockExchanges,
   },
   {
     path: "/relevantes",
-    // icon: <Papers />,
+    // icon: <>&#128462;</>,
     name: "Mais Relevantes",
     component: BovespaExchanges,
   },

@@ -19,7 +19,7 @@ export const Container = styled.div`
     all: unset;
     width: max-content;
     padding: 0.5rem;
-    margin-top: 1.25rem;
+    margin-top: 1rem;
     cursor: pointer;
     border-radius: 0.5rem;
     background: ${(props) => props.theme.colors.headerButtonBackground};

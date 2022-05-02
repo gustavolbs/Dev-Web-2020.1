@@ -88,4 +88,12 @@ export const Container = styled.div`
     color: ${(props) => props.theme.colors.cardButton};
     padding: 12px;
   }
+
+  @media screen and (max-width: 900px) {
+    max-width: calc(50% - 6px);
+  }
+
+  @media screen and (max-width: 800px) {
+    max-width: 100%;
+  }
 `;

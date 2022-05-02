@@ -6,7 +6,7 @@ import { useStocks } from "../../hooks/useStocks";
 
 // import Spinner from "../../components/Spinner";
 
-import { Container, CardList } from "./styles";
+import { CardList, Container } from "../../styles/pages";
 
 const Main: React.FC = () => {
   const { currencies, isLoading: currenciesLoading } = useCurrencies();
